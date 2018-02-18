@@ -16,19 +16,17 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- *
  * Search a string in Google, navigates to the Images Tab, returns to the All tab and checks first link before and after navigating
- *
  */
 public class CheckFirstUrlAfterReturningFromImageTab {
 
 
     private WebDriver driver;
-    private static final String GOOGLE_URL="http://google.com/ncr";
+    private static final String GOOGLE_URL = "http://google.com/ncr";
     private static final String LINK_FOR_COMPARE = "selenide.org/";
-    private static final String STRING_FOR_SEARCH="selenide";
-    //private static final String PATH_TO_CHROME_DRIVER= "C:\\Chromedriver\\chromedriver.exe";
-    private static final String PATH_TO_CHROME_DRIVER="chromedriver.exe";
+    private static final String STRING_FOR_SEARCH = "selenide";
+    private static final String PATH_TO_CHROME_DRIVER = "chromedriver.exe";
+
     @Test
     public void main() throws InterruptedException {
         System.out.println("Start test");
@@ -45,35 +43,35 @@ public class CheckFirstUrlAfterReturningFromImageTab {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 
-        System.out.println("Open "+GOOGLE_URL);
+        System.out.println("Open " + GOOGLE_URL);
         driver.get(GOOGLE_URL);
-        System.out.println("Searching "+STRING_FOR_SEARCH);
+        System.out.println("Searching " + STRING_FOR_SEARCH);
 
-        GoogleMainPage google=new GoogleMainPage(driver);
+        GoogleMainPage google = new GoogleMainPage(driver);
 
         google.searchInGoogle(STRING_FOR_SEARCH);
 
-        WebDriverWait wait= new WebDriverWait(driver,10);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         GoogleSearchAllResults allResults = new GoogleSearchAllResults(driver);
         wait.until(ExpectedConditions.visibilityOf(allResults.allResultsBlock));
 
 
         List<WebElement> foundResultsList = allResults.resultLinksList;
 
-        System.out.println("There are "+foundResultsList.size()+" results on the page:");
+        System.out.println("There are " + foundResultsList.size() + " results on the page:");
 
-        for(int i=0;i<foundResultsList.size();i++) {
+        for (int i = 0; i < foundResultsList.size(); i++) {
             System.out.println((i + 1) + ". " + foundResultsList.get(i).getText());
         }
         String firstLink = foundResultsList.get(0).getText();
 
         if (!firstLink.equals(LINK_FOR_COMPARE)) {
-            Assert.fail("First link isn't "+ LINK_FOR_COMPARE);
+            Assert.fail("First link isn't " + LINK_FOR_COMPARE);
         }
 
         foundResultsList.clear();
 
-        System.out.println("The first link is "+firstLink);
+        System.out.println("The first link is " + firstLink);
         System.out.println("Navigate to the Images tab");
 
         allResults.imagesTab.click();
@@ -87,7 +85,7 @@ public class CheckFirstUrlAfterReturningFromImageTab {
 
         GoogleSearchAllResults allResultsAfterNavigating = new GoogleSearchAllResults(driver);
 
-        foundResultsList =  allResultsAfterNavigating.resultLinksList;
+        foundResultsList = allResultsAfterNavigating.resultLinksList;
         System.out.println("Comparing results before and after navigating");
         String firstLinkAfterNavigating = foundResultsList.get(0).getText();
         if (!firstLink.equals(firstLinkAfterNavigating)) {
@@ -97,10 +95,11 @@ public class CheckFirstUrlAfterReturningFromImageTab {
         System.out.println("Finish the test");
 
     }
+
     @After
-    public void close(){
+    public void close() {
         driver.quit();
 
     }
 
-    }
+}

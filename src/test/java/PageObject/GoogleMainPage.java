@@ -8,15 +8,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 /**
- *
  * Initializes  Google search page
- *
  */
 
 public class GoogleMainPage {
     final private WebDriver driver;
 
-    @FindBy(id="lst-ib")
+    @FindBy(id = "lst-ib")
     public WebElement searchGoogleField;
 
     public GoogleMainPage(WebDriver driver) {
@@ -26,9 +24,9 @@ public class GoogleMainPage {
 
     /**
      * Inputs string for search in Google search field
-     * */
+     */
 
-    public void searchInGoogle(String stringForSearch){
+    public void searchInGoogle(String stringForSearch) {
         searchGoogleField.sendKeys(stringForSearch);
         searchGoogleField.sendKeys(Keys.ENTER);
 
