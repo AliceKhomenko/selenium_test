@@ -10,6 +10,15 @@ GENERAL USAGE NOTES
 RUNNING THE TEST
 ----------------
 For running this terst you should run CheckFirstURLAfterReturningFromImageTab in src/test/java package. In package PageObject you can find page objects for Google search page, Google search all results page and Google search images results page. This pages can help developing other tests for Google searching.
+For change settings in the test please, update config.properties.
+
+link.for.compare  - this link for comparing search results
+web.searcher = http://google.com/ncr - on this web searcher you can use
+string.for.search  - this parameter we search in web searcher
+browser.environment - parameter for selecting test browser
+os.environment - parameter for selecting operation system
+
+Unfortunately, this test supports only Chrome, but supports it for MacOs, Linux and Windows/
 
 If you have any questions you can contact with me:
 email: a.n.yakubina@gmail.com
