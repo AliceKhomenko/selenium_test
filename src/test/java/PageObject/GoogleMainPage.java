@@ -14,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 public class GoogleMainPage {
     final private WebDriver driver;
 
-    @FindBy(id = "lst-ib")
+    @FindBy(name = "q")
     public WebElement searchGoogleField;
 
     public GoogleMainPage(WebDriver driver) {
@@ -27,6 +27,7 @@ public class GoogleMainPage {
      */
 
     public void searchInGoogle(String stringForSearch) {
+        System.out.println("Searching: " + stringForSearch);
         searchGoogleField.sendKeys(stringForSearch);
         searchGoogleField.sendKeys(Keys.ENTER);
 
